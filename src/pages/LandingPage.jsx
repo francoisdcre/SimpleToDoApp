@@ -1,9 +1,6 @@
-import { useState } from "react";
-import { SquarePen } from "lucide-react";
+import { Link } from "react-router-dom";
 
-function LandingPage() {
-  const [todoCard, setTodoCard] = useState([]);
-
+function LandingPage({ todoCard, setTodoCard }) {
   function addTodoCard() {
     setTodoCard([
       ...todoCard,
@@ -223,7 +220,8 @@ function LandingPage() {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <button
+                  <Link
+                    to={`/todo/${todoCard.id}`}
                     className="
                       rounded-xl
                       border border-white/10
@@ -236,7 +234,7 @@ function LandingPage() {
                     "
                   >
                     Ouvrir
-                  </button>
+                  </Link>
 
                   <button
                     onClick={() => deleteTodoCard(todoCard.id)}
@@ -258,25 +256,25 @@ function LandingPage() {
           <button
             onClick={addTodoCard}
             className="
-    flex
-    h-[180px]
-    w-[280px]
-    items-center
-    justify-center
-    rounded-3xl
-    border
-    border-white/10
-    bg-white/[0.03]
-    text-6xl
-    text-white/40
-    backdrop-blur-xl
-    transition-all
-    duration-300
-    hover:-translate-y-1
-    hover:border-white/20
-    hover:bg-white/[0.06]
-    hover:text-white/70
-  "
+              flex
+              h-[180px]
+              w-[280px]
+              items-center
+              justify-center
+              rounded-3xl
+              border
+              border-white/10
+              bg-white/[0.03]
+              text-6xl
+              text-white/40
+              backdrop-blur-xl
+              transition-all
+              duration-300
+              hover:-translate-y-1
+              hover:border-white/20
+              hover:bg-white/[0.06]
+              hover:text-white/70
+            "
           >
             +
           </button>
