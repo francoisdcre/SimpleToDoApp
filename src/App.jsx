@@ -4,19 +4,19 @@ import TodoPage from "./pages/TodoPage.jsx";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [todoCard, setTodoCard] = useState(() => {
-    const savedTodoCards = localStorage.getItem("todoCards");
+  const [TodoList, setTodoList] = useState(() => {
+    const savedTodoLists = localStorage.getItem("TodoLists");
 
-    if (savedTodoCards) {
-      return JSON.parse(savedTodoCards);
+    if (savedTodoLists) {
+      return JSON.parse(savedTodoLists);
     }
 
     return [];
   });
 
   useEffect(() => {
-    localStorage.setItem("todoCards", JSON.stringify(todoCard));
-  }, [todoCard]);
+    localStorage.setItem("TodoLists", JSON.stringify(TodoList));
+  }, [TodoList]);
 
   return (
     <>
@@ -24,12 +24,12 @@ function App() {
         <Route
           path="/"
           element={
-            <LandingPage todoCard={todoCard} setTodoCard={setTodoCard} />
+            <LandingPage TodoList={TodoList} setTodoList={setTodoList} />
           }
         />
         <Route
           path="/todo/:id"
-          element={<TodoPage todoCard={todoCard} setTodoCard={setTodoCard} />}
+          element={<TodoPage TodoList={TodoList} setTodoList={setTodoList} />}
         />
       </Routes>
     </>

@@ -1,25 +1,26 @@
 import { Link } from "react-router-dom";
 
-function LandingPage({ todoCard, setTodoCard }) {
-  function addTodoCard() {
-    setTodoCard([
-      ...todoCard,
+function LandingPage({ TodoList, setTodoList }) {
+  function addTodoList() {
+    setTodoList([
+      ...TodoList,
       {
         id: crypto.randomUUID(),
         nom: "Nouvelle Liste",
+        tasks: [],
       },
     ]);
   }
 
-  function deleteTodoCard(idToDelete) {
-    const newTodoCard = todoCard.filter(
-      (todoCard) => todoCard.id !== idToDelete,
+  function deleteTodoList(idToDelete) {
+    const newTodoList = TodoList.filter(
+      (TodoList) => TodoList.id !== idToDelete,
     );
-    setTodoCard(newTodoCard);
+    setTodoList(newTodoList);
   }
 
   function updateTodoName(idToUpdate, newName) {
-    const updatedCards = todoCard.map((card) => {
+    const updatedCards = TodoList.map((card) => {
       if (card.id === idToUpdate) {
         return {
           ...card,
@@ -30,7 +31,7 @@ function LandingPage({ todoCard, setTodoCard }) {
       return card;
     });
 
-    setTodoCard(updatedCards);
+    setTodoList(updatedCards);
   }
 
   return (
@@ -137,9 +138,9 @@ function LandingPage({ todoCard, setTodoCard }) {
           Toutes vos listes
         </h1>
         <div className="flex flex-row gap-10 w-full flex-wrap">
-          {todoCard.map((todoCard) => (
+          {TodoList.map((TodoList) => (
             <article
-              key={todoCard.id}
+              key={TodoList.id}
               className="
       group
       relative
@@ -198,9 +199,9 @@ function LandingPage({ todoCard, setTodoCard }) {
                   <input
                     type="text"
                     placeholder="Nom de la liste"
-                    value={todoCard.nom}
+                    value={TodoList.nom}
                     onChange={(e) =>
-                      updateTodoName(todoCard.id, e.target.value)
+                      updateTodoName(TodoList.id, e.target.value)
                     }
                     onBlur={(e) => {
                       e.target.scrollLeft = 0;
@@ -221,7 +222,7 @@ function LandingPage({ todoCard, setTodoCard }) {
 
                 <div className="flex items-center justify-between">
                   <Link
-                    to={`/todo/${todoCard.id}`}
+                    to={`/todo/${TodoList.id}`}
                     className="
                       rounded-xl
                       border border-white/10
@@ -237,7 +238,7 @@ function LandingPage({ todoCard, setTodoCard }) {
                   </Link>
 
                   <button
-                    onClick={() => deleteTodoCard(todoCard.id)}
+                    onClick={() => deleteTodoList(TodoList.id)}
                     className="
             rounded-xl
             px-3 py-2
@@ -254,7 +255,7 @@ function LandingPage({ todoCard, setTodoCard }) {
             </article>
           ))}
           <button
-            onClick={addTodoCard}
+            onClick={addTodoList}
             className="
               flex
               h-[180px]
